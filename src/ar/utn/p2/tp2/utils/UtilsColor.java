@@ -18,6 +18,22 @@ public class UtilsColor {
         };
         System.out.println(color + mensaje + RESET);
     }
+
+    public static void imprimirBloque(ContextColor contexto, String mensaje, char salto) {
+        String color = switch (contexto) {
+            case SUCCESS -> VERDE;
+            case ERROR -> ROJO;
+            case WARNING -> AMARILLO;
+            case INFO -> AZUL;
+            case DEFAULT -> BLANCO;
+        };
+
+        if (salto == 'n') {
+            System.out.print(color + mensaje + RESET);
+        } else {
+            System.out.println(color + mensaje + RESET);
+        }
+    }
     public static void imprimirEncabezado() {
         System.out.println();
         UtilsColor.imprimirBloque(ContextColor.INFO,"======Resultados======");
