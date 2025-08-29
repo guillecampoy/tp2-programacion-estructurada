@@ -4,7 +4,6 @@ import ar.utn.p2.tp2.core.Exercise;
 import ar.utn.p2.tp2.utils.ContextColor;
 import ar.utn.p2.tp2.utils.UtilsColor;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class CalculoDescuentoCategoria implements Exercise {
