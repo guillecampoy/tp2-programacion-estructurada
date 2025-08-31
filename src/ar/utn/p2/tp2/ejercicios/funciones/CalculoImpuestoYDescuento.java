@@ -22,7 +22,7 @@ public class CalculoImpuestoYDescuento implements Exercise {
        precioFinal = Math.round(calcularPrecioFinal(impuesto, descuento, precioBase));
 
        UtilsColor.imprimirEncabezado();
-       UtilsColor.imprimirBloque(ContextColor.INFO, "El precio final del producto es: "+precioFinal);
+       UtilsColor.imprimirBloque(ContextColor.SUCCESS, "El precio final del producto es: "+precioFinal);
     }
 
     double calcularPrecioFinal(double impuesto, double descuento, double precioBase) {
