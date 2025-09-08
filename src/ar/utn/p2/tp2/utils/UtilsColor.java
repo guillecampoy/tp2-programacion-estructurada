@@ -8,7 +8,7 @@ public class UtilsColor {
     private static final String AZUL = "\u001B[34m";
     private static final String BLANCO = "\u001B[37m";
 
-    public static void imprimirResultados(ContextColor contexto, String mensaje) {
+    public static void imprimirBloque(ContextColor contexto, String mensaje) {
         String color = switch (contexto) {
             case SUCCESS -> VERDE;
             case ERROR -> ROJO;
@@ -18,8 +18,24 @@ public class UtilsColor {
         };
         System.out.println(color + mensaje + RESET);
     }
+
+    public static void imprimirBloque(ContextColor contexto, String mensaje, char salto) {
+        String color = switch (contexto) {
+            case SUCCESS -> VERDE;
+            case ERROR -> ROJO;
+            case WARNING -> AMARILLO;
+            case INFO -> AZUL;
+            case DEFAULT -> BLANCO;
+        };
+
+        if (salto == 'n') {
+            System.out.print(color + mensaje + RESET);
+        } else {
+            System.out.println(color + mensaje + RESET);
+        }
+    }
     public static void imprimirEncabezado() {
         System.out.println();
-        UtilsColor.imprimirResultados(ContextColor.INFO,"======Resultados======");
+        UtilsColor.imprimirBloque(ContextColor.INFO,"======Resultados======");
     }
 }

@@ -1,117 +1,92 @@
 package ar.utn.p2.tp2.app;
 import ar.utn.p2.tp2.core.Exercise;
-import ar.utn.p2.tp2.utils.ContextColor;
-import ar.utn.p2.tp2.utils.UtilsColor;
+import ar.utn.p2.tp2.ejercicios.arrays.ModificacionListaPrecios;
+import ar.utn.p2.tp2.ejercicios.condicionales.CalculoDescuentoCategoria;
+import ar.utn.p2.tp2.ejercicios.condicionales.ClasificacioEdad;
+import ar.utn.p2.tp2.ejercicios.condicionales.MayorDeTres;
+import ar.utn.p2.tp2.ejercicios.condicionales.VerificarAnioBisiesto;
+import ar.utn.p2.tp2.ejercicios.funciones.ActualizaStock;
+import ar.utn.p2.tp2.ejercicios.funciones.CalculoDescuentoEspecial;
+import ar.utn.p2.tp2.ejercicios.funciones.CalculoImpuestoYDescuento;
+import ar.utn.p2.tp2.ejercicios.funciones.CostoEnvioYCompra;
+import ar.utn.p2.tp2.ejercicios.recursividad.ImpresionRecursivaArray;
+import ar.utn.p2.tp2.ejercicios.repeticion.ContadorPosNegCero;
+import ar.utn.p2.tp2.ejercicios.repeticion.SumaPares;
+import ar.utn.p2.tp2.ejercicios.repeticion.ValidacionNota;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
-    private final Map<Integer, Exercise> registry = new LinkedHashMap<>();
-
-    public static void main(String[] args) {
-        // Si la terminal no soporta ANSI, descomentar la siguiete línea
-        // ConsoleStyle.setEnabled(false);
-        new Menu().run();
-    }
-
-    private void run() {
-        initRegistry(); // registrar placeholders
-        try (Scanner in = new Scanner(System.in)) {
-            boolean running = true;
-            while (running) {
-                printHeader();
-                printOptions();
-                System.out.print("\nSeleccione una opción (0 para salir): ");
-                String input = in.nextLine().trim();
-                int option = parseIntOrMinusOne(input);
-
-                if (option == 0) {
-                    UtilsColor.imprimirResultados(ContextColor.INFO, "\n¡Hasta luego!");
-                    running = false;
-                } else if (registry.containsKey(option)) {
-                    Exercise ex = registry.get(option);
-                    UtilsColor.imprimirResultados(ContextColor.INFO, "Ejercicio " + option);
-                    try {
-                        ex.execute(); // acá, cuando implementes, ejecutará la lógica real
-                    } catch (UnsupportedOperationException uoe) {
-                        UtilsColor.imprimirResultados(ContextColor.WARNING, "Pendiente de implementar ejercicio " + option + ".");
-                    } catch (Exception e) {
-                        UtilsColor.imprimirResultados(ContextColor.ERROR,"Ocurrió un error ejecutando el ejercicio " + option + ": " + e.getMessage());
-                    }
-                    promptEnterToContinue(in);
-                } else {
-                    UtilsColor.imprimirResultados(ContextColor.WARNING,"Opción inválida: " + input);
-                    promptEnterToContinue(in);
+    public static class Main {
+        private static final Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args) {
+            int opcion;
+            do {
+                mostrarMenu();
+                opcion = leerOpcion();
+                Exercise ejercicio = obtenerEjercicio(opcion);
+                if (ejercicio != null) {
+                    ejercicio.execute();
+                } else if (opcion != 0) {
+                    System.out.println("Opción no válida");
                 }
+                if (opcion != 0) {
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
+                }
+
+            }
+            while (opcion != 0);
+            System.out.println("Chau!");
+            scanner.close();
+        }
+
+        private static void mostrarMenu() {
+            System.out.println("\n===============================================");
+            System.out.println("   Trabajo Práctico 2 - Programación estructurada");
+            System.out.println("=================================================");
+            System.out.println("1. Verificación de Año Bisiesto");
+            System.out.println("2. Determinar el Mayor de Tres Números");
+            System.out.println("3. Clasificación de Edad");
+            System.out.println("4. Calculadora de Descuento según categoría");
+            System.out.println("5. Suma de Números Pares (while)");
+            System.out.println("6. Contador de Positivos, Negativos y Ceros (for)");
+            System.out.println("7. Validación de Nota entre 0 y 10 (do-while)");
+            System.out.println("8. Cálculo del Precio Final con impuesto y descuento");
+            System.out.println("9. Composición de funciones para calcular costo de envío y total de compra");
+            System.out.println("10.Actualización de stock a partir de venta y recepción de productos");
+            System.out.println("11.Cálculo de descuento especial usando variable global");
+            System.out.println("12.Modificación de un array de precios y visualización de resultados");
+            System.out.println("13.Impresión recursiva de arrays antes y después de modificar un elemento");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+        }
+
+        private static int leerOpcion () {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                return -1;
             }
         }
-    }
 
-    /** Registra los 13 ejercicios con placeholders (a reemplazar cuando implementes). */
-    private void initRegistry() {
-        // Condicionales
-        //registry.put(1, notImplemented("Verificación de año bisiesto"));
-       // registry.put(2, notImplemented("Mayor de tres números"));
-       // registry.put(3, notImplemented("Clasificación de edad"));
-       // registry.put(4, notImplemented("Descuento por categoría (A/B/C)"));
-
-        // Repetición
-       // registry.put(5, notImplemented("Suma de números pares (while)"));
-       // registry.put(6, notImplemented("Contador positivos/negativos/ceros (for)"));
-       // registry.put(7, notImplemented("Validación de nota 0–10 (do-while)"));
-
-        // Funciones
-        //registry.put(8, notImplemented("Precio final (base + impuesto − descuento)"));
-        //registry.put(9, notImplemented("Costo de envío + total de compra (composición)"));
-        //registry.put(10, notImplemented("Actualización de stock"));
-        //registry.put(11, notImplemented("Descuento especial con variable global"));
-
-        // Arrays y Recursividad
-        //registry.put(12, notImplemented("Array de precios (modificar y mostrar)"));
-        //registry.put(13, notImplemented("Impresión recursiva de array antes/después"));
-    }
-
-    private void printHeader() {
-        System.out.println("\n==============================================");
-        System.out.println("   Programación II — TP2: Programación Estructurada");
-        System.out.println("==============================================");
-    }
-
-    private void printOptions() {
-        System.out.println("\nCondicionales");
-        System.out.println("  1) Año bisiesto");
-        System.out.println("  2) Mayor de tres números");
-        System.out.println("  3) Clasificación de edad");
-        System.out.println("  4) Descuento por categoría");
-
-        System.out.println("\nRepetición");
-        System.out.println("  5) Suma de pares (while)");
-        System.out.println("  6) Contador +/-/0 (for)");
-        System.out.println("  7) Validación de nota (do-while)");
-
-        System.out.println("\nFunciones / Métodos");
-        System.out.println("  8) Precio final");
-        System.out.println("  9) Costo de envío + total");
-        System.out.println(" 10) Actualizar stock");
-        System.out.println(" 11) Descuento especial (global)");
-
-        System.out.println("\nArrays y Recursividad");
-        System.out.println(" 12) Array de precios (modificar)");
-        System.out.println(" 13) Array de precios (recursivo)");
-        System.out.println("\n  0) Salir");
-    }
-    private void promptEnterToContinue(Scanner in) {
-        System.out.print("\nPresione ENTER para volver al menú...");
-        in.nextLine();
-    }
-
-    private int parseIntOrMinusOne(String s) {
-        try {
-            return Integer.parseInt(s);
-        } catch (NumberFormatException nfe) {
-            return -1;
+        private static Exercise obtenerEjercicio(int opcion) {
+            return switch (opcion) {
+                case 1  -> new VerificarAnioBisiesto();
+                case 2  -> new MayorDeTres();
+                case 3  -> new ClasificacioEdad();
+                case 4  -> new CalculoDescuentoCategoria();
+                case 5  -> new SumaPares();
+                case 6  -> new ContadorPosNegCero();
+                case 7  -> new ValidacionNota();
+                case 8  -> new CalculoImpuestoYDescuento();
+                case 9  -> new CostoEnvioYCompra();
+                case 10 -> new ActualizaStock();
+                case 11 -> new CalculoDescuentoEspecial();
+                case 12 -> new ModificacionListaPrecios();
+                case 13 -> new ImpresionRecursivaArray();
+                default -> null;
+            };
         }
     }
 }
