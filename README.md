@@ -20,7 +20,7 @@ Implementar una serie de ejercicios de **programación estructurada** en Java (c
 
 ---
 
-## 📋 Guía de ejercicios (pendientes de implementación)
+## 📋 Guía de ejercicios
 
 ### Condicionales
 1. Verificación de año bisiesto
