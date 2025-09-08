@@ -15,7 +15,7 @@ Implementar una serie de ejercicios de **programación estructurada** en Java (c
 ## 🗂️ Estructura propuesta de paquetes
 
 - **`core/Exercise.java`**: interfaz común con `void execute()` para cada ejercicio.
-- **`utils/ConsoleStyle.java`**: utilitaria de **decorado** para imprimir títulos/éxitos/errores con ANSI (opcional pero recomendado).
+- **`utils/UtilsColor.java`**: utilitaria de **decorado** para imprimir títulos/éxitos/errores.
 - **`app/Menu.java`**: punto de entrada (`public static void main`), menú textual y registro de ejercicios.
 - **`ejercicios/..**: paquete para la implementación de ejercicios según tema.
 
