@@ -21,7 +21,7 @@ public class CalculoDescuentoEspecial implements Exercise {
     void calcularDescuentoEspecial(double precio){
         double descuentoAplicado = precio*descuento;
         double costofinal = precio - descuentoAplicado;
-        UtilsColor.imprimirBloque(ContextColor.SUCCESS, "El descuento especial aplicado es: "+descuentoAplicado);
-        UtilsColor.imprimirBloque(ContextColor.SUCCESS, "El precio final con descuento es: "+costofinal);
+        UtilsColor.imprimirBloque(ContextColor.SUCCESS, "El descuento especial aplicado es: "+"%.2f".formatted(descuentoAplicado));
+        UtilsColor.imprimirBloque(ContextColor.SUCCESS, "El precio final con descuento es: "  +"%.2f".formatted(costofinal));
     }
 }
