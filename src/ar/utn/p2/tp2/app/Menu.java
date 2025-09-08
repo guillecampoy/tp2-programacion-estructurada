@@ -1,6 +1,6 @@
 package ar.utn.p2.tp2.app;
 import ar.utn.p2.tp2.core.Exercise;
-import ar.utn.p2.tp2.ejercicios.arrays.ModificacionArrayPrecios;
+import ar.utn.p2.tp2.ejercicios.arrays.ModificacionListaPrecios;
 import ar.utn.p2.tp2.ejercicios.condicionales.CalculoDescuentoCategoria;
 import ar.utn.p2.tp2.ejercicios.condicionales.ClasificacioEdad;
 import ar.utn.p2.tp2.ejercicios.condicionales.MayorDeTres;
@@ -83,7 +83,7 @@ public class Menu {
                 case 9  -> new CostoEnvioYCompra();
                 case 10 -> new ActualizaStock();
                 case 11 -> new CalculoDescuentoEspecial();
-                case 12 -> new ModificacionArrayPrecios();
+                case 12 -> new ModificacionListaPrecios();
                 case 13 -> new ImpresionRecursivaArray();
                 default -> null;
             };
